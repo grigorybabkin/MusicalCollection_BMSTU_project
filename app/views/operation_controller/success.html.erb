@@ -1,0 +1,18 @@
+Success! 
+<%=Person.all.collect{|i| i }%></br>
+<!-- <%=Artist.all.collect{|i| i }%></br> -->
+<!--<%=ArtistList.all.collect{|i| i }%></br>
+<%=Label.all.collect{|i| i }%></br>
+<%=Album.all.collect{|i| i }%></br>-->
+<!--<%=Composition.all.collect{|i| i }%></br>-->
+<!-- <%=CompositionList.all.collect{|i| i }%></br> -->
+<!-- <%=MusicStorage.all.collect{|i| i }%></br> -->
+<!-- <%=StorageList.all.collect{|i| i }%></br>--> -->
+
+<%Person.all.each do |p| %>
+    <%= image_tag p.avatar.url(:thumb) if p.avatar? %> 
+<%end%></br>
+
+<!--<%Label.all.each do |p| %>
+    <%= image_tag p.avatar.url(:thumb) if p.avatar? %> 
+<%end%></br>-->

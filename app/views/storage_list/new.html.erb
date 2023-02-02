@@ -1,0 +1,36 @@
+<h1 class="cent" >Add</h1>
+
+<div class="center">
+
+<h3 class="grey">Music storage</h3>
+
+<%= form_for @storage_list  do |f| %>
+
+  <div class="form-group">
+    <%= f.label :music_storage_id %>
+    <%= f.select :music_storage_id, MusicStorage.all.collect { |p| [ p.name, p.id ] }, {}, { :class => 'form-control' } %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :album_id %>
+    <%= f.select( :album_id, 
+        Album.order(:name).all.collect do |s|
+             date = s.release_date
+             if !date.nil? then
+                 mon = date.month.to_s 
+                 mon = '0' + mon if mon.size == 1 
+                 p_date = date.day.to_s + '.' + mon + '.' + date.year.to_s 
+            end
+            [s.name + " ( " + s.album_type.name + " / " + p_date.to_s + " )", s.id]
+        end, {}, { :class => 'form-control' }) %>
+  </div>
+ 
+  <div class="form-group">
+    <%= f.label :production_year %>
+    <%= f.date_field :production_year, class: "form-control" %>
+  </div>
+
+  <%= f.submit 'Create', class: "btn btn-outline-secondary btn-block" %>
+<% end %> 
+
+</div>

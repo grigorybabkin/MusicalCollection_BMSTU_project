@@ -1,0 +1,35 @@
+<h1 class="cent" >Add</h1>
+
+<div class="center">
+
+<h3 class="grey">Album</h3> 
+
+<%= form_for @album, html: { multipart: true }  do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :album_type_id %>
+    <%= f.select :album_type_id, AlbumType.order(:name).all.collect { |p| [ p.name, p.id ] }, {}, { :class => 'form-control' } %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :release_date %>
+    <%= f.date_field :release_date, class: "form-control" %>
+  </div> 
+
+  <div class="form-group">
+    <%= f.label :label_id %>
+    <%= f.select :label_id, Label.order(:name).all.collect { |p| [ p.name, p.id ] }, {}, { :class => 'form-control' } %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.file_field :avatar %>
+  </div>
+ 
+  <%= f.submit 'Create', class: "btn btn-outline-secondary btn-block" %>
+<% end %>
+
+</div>

@@ -1,0 +1,32 @@
+<div class="row justify-content-center user_page">
+<div class="col-5 text-center m-0 vh-100 d-flex flex-column justify-content-center text-dark  bg-secondary devise_border">
+<h1>MUSICAL COLLECTION</h1>
+<br/>
+<h2 class="space">Log in</h2>
+<br />
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control form-control-lg" %>
+  </div>
+<br />
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password, autocomplete: "current-password", class:"form-control form-control-lg" %>
+  </div>
+  
+  <% if devise_mapping.rememberable? %>
+    <div class="field">
+      <%= f.check_box :remember_me%>
+      <%= f.label :remember_me %>
+    </div>
+  <% end %>
+<br />
+  <div class="actions">
+    <%= f.submit "Log in", class:"btn btn-oulline-light form-control form-control-lg" %>
+  </div>
+<% end %>
+
+</div>
+</div>

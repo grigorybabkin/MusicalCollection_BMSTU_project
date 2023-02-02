@@ -1,0 +1,38 @@
+<h1>Composition Lists Report</h1>
+<table class="table table-bordered table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th>id</th>
+            <th>Composition name</th>
+            <th>Composition duration</th>
+            <th>Composition genre</th>
+            <th>Composition release date</th>
+            <th>Author name</th>
+            <th>Artist name</th>
+            <th># in album</th>
+            <th>Album name</th>
+            <th>Album type</th>
+            <th>Album label</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @composition_lists.each do |s| %>
+        <tr>
+            <td><%= s.id%></td>
+            <td><%= s.composition_name%></td>
+            <td><%= s.duration%></td>
+            <td><%= s.genre%></td>
+
+            <td><%= s.release_date%></td>
+            <td><%= s.first_name+" "+s.last_name%></td>
+            <td><%= s.artist_name%></td>
+            <td><%= s.position_number%></td>
+            <td><%= s.album_name%></td>
+            <td><%= s.album_type%></td>
+            <td><%= s.label%></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+            
+    

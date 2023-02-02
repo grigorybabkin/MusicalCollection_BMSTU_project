@@ -1,0 +1,41 @@
+<h1>Storage Lists Report</h1>
+<table class="table table-bordered table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th>id</th>
+            <th>Storage name</th>
+            <th>Storage type</th>
+            <th>Production company</th>
+            <th>Rack</th>
+            <th>Shelf</th>
+            <th>Section</th>
+            <th>Cell</th>
+            <th>Album name</th>
+            <th>Album type</th>
+            <th>Album label</th>
+            <th>Production year</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @storage_lists.each do |s| %>
+        <tr>
+            <td><%= s.id%></td>
+            <td><%= s.storage_name%></td>
+            <td><%= s.storage_type%></td>
+            <td><%= s.company_name%></td>
+
+            <td><%= s.rack%></td>
+            <td><%= s.shelf%></td>
+            <td><%= s.section%></td>
+            <td><%= s.cell%></td>
+            <td><%= s.album_name%></td>
+            <td><%= s.album_type%></td>
+            <td><%= s.label_name%></td>
+            <td><%= s.production_year%></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+            
+    
+ 

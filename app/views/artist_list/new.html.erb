@@ -1,0 +1,51 @@
+<h1 class="cent" >Add</h1>
+
+<div class="center">
+
+<h3 class="grey">Artist Info</h3> 
+
+<%= form_for @artist_list do |f| %>
+
+  <div class="form-group">
+    <%= f.label :artist_id %>
+    <%= f.select( :artist_id, 
+        Artist.order(:name).all.collect do |s|
+            if s.type_band
+                type = "band"
+            else type = "single"
+            end
+        [ s.name + " - " + type, s.id ]
+        end, 
+        {}, { :class => 'form-control' }) %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :person_id %>
+    <%= f.select( :person_id,   
+        Person.order(:name).all.collect do |s|
+            date = s.birth_date
+            mon = date.month.to_s
+            mon = '0' + mon if mon.size == 1
+            date = date.day.to_s + '.' + mon + '.' + date.year.to_s
+            result = s.first_name.to_s + " " + s.last_name.to_s + " ( " + date + " " + Country.all.find(s.country_id).name + " ) "
+            [result, s.id]
+        end,        
+        {}, { :class => 'form-control' } ) %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :debut_year %>
+    <%= f.date_field :debut_year, class: "form-control" %>
+  </div> 
+ 
+  <div class="form-group">
+    <%= f.label :end_year %>
+    <%= f.date_field :end_year, class: "form-control" %>
+  </div>
+ 
+  <%= f.submit 'Create', class: "btn btn-outline-secondary btn-block" %>
+<% end %> 
+
+</div>
+
+

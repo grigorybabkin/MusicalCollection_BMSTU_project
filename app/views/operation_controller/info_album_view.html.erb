@@ -1,0 +1,79 @@
+<div class="row justify-content-center">
+    <div class="col-11 name_field">
+        <div class="row type">ALBUM</div>
+        <div class="row  name_field"><%= @album.name%></div></div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-4">
+        <%= image_tag @album.avatar.url(:thumb) if @album.avatar?%>
+    </div>
+    <div class="col-7">
+        <div class="row description">
+            <div class="col-3 ">ALBUM TYPE:</div>
+            <div class="col-9"><%= @album.album_type.name%></div>
+        </div>
+        <div class="row description">
+            <div class="col-3 ">GENRES:</div>
+            <div class="col-9">
+                <% @album.compositions.group(:genre_id).each do |s|%>
+                <%= s.genre.name %>&nbsp;&nbsp;&nbsp;
+                <%end%>
+            </div>
+        </div>
+        <div class="row description">
+            <div class="col-3 ">ARTISTS:</div>
+            <div class="col-9">
+                <% @album.artists.each do |s|%>
+                <%= link_to s.name, info_artist_view_path(:artist_id => s.id)%>&nbsp;&nbsp;&nbsp;
+                <% end %>
+            </div>
+        </div>
+        <div class="row description">
+            <div class="col-3 ">AUTHORS:</div>
+            <div class="col-9">
+                <% @album.persons.each do |s|%>
+                <%= link_to s.first_name+" "+s.last_name, info_person_view_path(:person_id => s.id)%>&nbsp;&nbsp;&nbsp;
+                <% end %>
+            </div>
+        </div>
+        <div class="row description">
+            <div class="col-3 ">LABEL:</div>
+            <div class="col-9"><%= link_to @album.label.name, info_label_view_path(:label_id => @album.label.id)%></div>
+        </div>
+        <div class="row description">
+            <div class="col-3 ">RELEASE DATE:</div>
+            <div class="col-9"><%= @album.release_date%></div>
+        </div>
+        <div class="row description">
+            <div class="col-3 ">MUSIC STORAGES:</div>
+            <div class="col-9"><% @album.music_storages.each do |s|%>
+                <%= link_to s.name+" ("+s.name+")", info_storage_view_path(:music_storage_id => s.id)%>&nbsp;&nbsp;&nbsp;
+                <% end %></div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center space">
+    <div class="col-11">TRACKS:</div>
+</div> 
+<div class="row justify-content-center">
+<div class="col-11">
+<table class="table">
+    <thead >
+        <tr class="row">
+            <th class="col-1">#</th>
+            <th class="col-8">Name</th>
+            <th class="col-3">Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @album.composition_lists.order(:position_number).group(:composition_id).each do |s|%>
+    <tr class="row">    
+        <td class="col-1"><%=s.position_number %></td>
+        <td class="col-8"><%= link_to s.composition.name, info_composition_view_path(:composition_id => s.composition.id)%></td>
+        <td class="col-3"><%= s.composition.duration.strftime("%H:%M:%S")%></td>
+    </tr>
+    <% end %>
+    </tbody>
+    </table>
+</div>
+</div> 

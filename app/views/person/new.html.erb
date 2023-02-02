@@ -1,0 +1,43 @@
+<h1 class="cent" >Add</h1>
+
+<div class="center">
+
+<h3 class="grey">Person</h3> 
+
+
+<%= form_for @person, html: { multipart: true }  do |f| %>
+  <div class="form-group">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: "form-control" %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, class: "form-control" %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :birth_date %>
+    <%= f.date_field :birth_date, class: "form-control" %>
+  </div> 
+ 
+  <div class="form-group">
+    <%= f.label :death_date %>
+    <%= f.date_field :death_date, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :country_id %>
+    <%= f.select :country_id, Country.all.collect { |p| [ p.name, p.id ] }, {}, { :class => 'form-control' } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.file_field :avatar %>
+  </div>
+ 
+  <%= f.submit 'Create', class: "btn btn-outline-secondary btn-block" %>
+<% end %> 
+
+</div>
+
+</div>

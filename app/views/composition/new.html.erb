@@ -1,0 +1,36 @@
+<h1 class="cent" >Add</h1>
+
+<div class="center">
+
+<h3 class="grey">Composition</h3>
+
+<%= form_for @composition  do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :genre_id %>
+    <%= f.select :genre_id, Genre.order(:name).all.collect { |p| [ p.name, p.id ] }, {}, { :class => 'form-control' } %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :duration %>
+    <%= f.time_field :duration, class: "form-control" %>
+  </div> 
+ 
+  <div class="form-group">
+    <%= f.label :release_date %>
+    <%= f.date_field :release_date, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :lyrics %>
+    <%= f.text_area :lyrics, class: "form-control" %>
+  </div>
+ 
+  <%= f.submit 'Create', class: "btn btn-outline-secondary btn-block" %>
+<% end %> 
+
+</div>

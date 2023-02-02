@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-11 ">
+        <div class="row type">ARTIST</div>
+        <div class="row  name_field"><%= @artist.name%></div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-4">
+        <%= image_tag @artist.avatar.url(:thumb) if @artist.avatar?%>
+    </div>
+    <div class="col-7">
+        <div class="row description">
+            <div class="col-4">ARTIST TYPE:</div>
+            <div class="col-8">
+            <% if @artist.type_band -%>
+            Band 
+            <% else %>
+            Single
+            <% end -%>
+            </div>
+        </div>
+        <div class="row description">
+            <div class="col-4">MEMBERS:</div>
+            <div class="col-8">
+            <% @artist.people.each do |s| %>
+            <%= link_to s.first_name+" "+s.last_name, info_person_view_path(:person_id => s.id) %>&nbsp;&nbsp;&nbsp;
+            <% end %>
+            </div>
+        </div>
+        <div class="row description">
+            <div class="col-4">ALBUMS:</div>
+            <div class="col-8">
+            <% @artist.albums.each do |s| %>
+            <%= link_to s.name, info_album_view_path(:album_id => s.id) %>&nbsp;&nbsp;&nbsp;
+            <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center space">
+    <div class="col-11">BIOGRAPHY:</div>
+</div> 
+
+<div class="row justify-content-center">
+    <div class="col-11"><%= simple_format( @artist.bio) %></div>
+</div>

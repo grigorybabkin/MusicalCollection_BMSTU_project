@@ -1,0 +1,2 @@
+module StorageListHelper
+end

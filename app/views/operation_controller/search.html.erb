@@ -1,0 +1,240 @@
+<div id="search_block" class="wow fadeInUp" data-wow-offset="100" data-wow-duration="1.5s">
+    <div class=" btn-group btn-group-lg btn-block" role="group">
+        <%=button_tag "Album", id:"album_search_btn", title:"Search album", class:"btn btn-warning btn-block"%>
+        <%=button_tag "Artist", id:"artist_search_btn", title:"Search artist", class:"btn btn-warning btn-block"%>
+        <%=button_tag "Composition", id:"composition_search_btn", title:"Search composition", style:"background-color:'white'", class:"btn btn-warning btn-block active"%>
+        <%=button_tag "Music Storage", id:"mus_stor_search_btn", title:"Search music storage", class:"btn btn-warning btn-block"%>
+        <%=button_tag "Music Storage 2", id:"mus_stor_search_country_btn", title:"Search music stotages with country requests", class:"btn btn-warning btn-block"%>
+    </div>
+            
+    <div id="search_form_block">
+    <div id="composition_sf_block" class="sf_block_padd">
+        <%= form_with id:'composition_search_form', method: :get, url: composition_search_path(format: :json) do |form|  %>
+    
+            <div class="row row_search_params">
+                <div class="col-3 col_search_params">Name</div>
+                <div class="col-9"><%= form.text_field :request_name, placeholder:"enter name of composition", class:"form-control form-control-lg" %></div>
+            </div>
+                    
+            <div class="row row_search_params">
+                <div class="col-3 col_search_params">Artist</div>
+                <div class="col-9">
+                    <select class="form-control form-control-lg" name="composition_artist_id" id="composition_artist_id">
+                        <% Artist.order(:name).all.each do |s|%>
+                            <option value=<%= s.id %>><%= s.name %></option>
+                        <%end%>
+                    </select>
+                </div>
+            </div>
+                    
+            <div class="row row_search_params">
+                <div class="col-3 col_search_params">Genre</div>
+                <div class="col-9">
+                    <select class="form-control form-control-lg" name="composition_genre_id" id="composition_genre_id">
+                        <% Genre.order(:name).all.each do |s|%>
+                            <option value=<%= s.id %>><%= s.name %></option>
+                        <%end%>
+                    </select>
+                </div>
+            </div>
+                        
+            <div class="row row_search_params">
+                <div class="col-3 col_search_params">Date</div>
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col-6 col_date_from">
+                        Date from<%= form.date_field :date_from, value:"1900-01-01", min:"1900-01-01", max: Time.now.strftime('%Y-%m-%d'), class:"form-control form-control-lg" %>
+                        </div>
+                        <div class="col-6 col_date_to">
+                        Date to<%= form.date_field :date_to, value: Time.now.strftime('%Y-%m-%d'), min:"1900-01-01", max: Time.now.strftime('%Y-%m-%d'), class:"form-control form-control-lg" %>
+                        </div>
+                    </div>
+                </div>
+             </div>     
+            
+            <div class="row row_search_params">
+            <div class="col"><%= form.submit "search", class:"btn btn-outline-warning btn-block rounded" %></div></div>
+        <% end %>
+    </div>
+    
+    <div id="album_sf_block" class="sf_block sf_block_padd" style="visibility: hidden">
+        <%= form_with id:'album_search_form', method: :get, url: album_search_path(format: :json) do |form|  %>
+    
+            <div class="row row_search_params">
+                <div class="col-3 col_search_params">Name</div>
+                <div class="col-9"><%= form.text_field :request_name, placeholder:"enter name of album", class:"form-control form-control-lg" %></div>
+            </div>
+                    
+            <div class="row row_search_params">
+                <div class="col-3 col_search_params">Artist</div>
+                <div class="col-9">
+                    <select class="form-control form-control-lg" name="album_artist_id" id="album_artist_id">
+                        <% Artist.order(:name).all.each do |s|%>
+                            <option value=<%= s.id %>><%= s.name %></option>
+                        <%end%>
+                    </select>
+                </div>
+            </div>
+                    
+            <div class="row row_search_params">
+                <div class="col-3 col_search_params">Label</div>
+                <div class="col-9">
+                    <select class="form-control form-control-lg" name="album_label_id" id="album_label_id">
+                        <% Label.order(:name).all.each do |s|%>
+                            <option value=<%= s.id %>><%= s.name %></option>
+                        <%end%>
+                    </select>
+                </div>
+            </div>
+                        
+            <div class="row row_search_params">
+                <div class="col-3 col_search_params">Release date</div>
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col-6 col_date_from">
+                        Date from<%= form.date_field :date_from, value:"1900-01-01", min:"1900-01-01", max: Time.now.strftime('%Y-%m-%d'), class:"form-control form-control-lg" %>
+                        </div>
+                        <div class="col-6 col_date_to">
+                        Date to<%= form.date_field :date_to, value: Time.now.strftime('%Y-%m-%d'), min:"1900-01-01", max: Time.now.strftime('%Y-%m-%d'), class:"form-control form-control-lg" %>
+                        </div>
+                    </div>
+                </div>
+             </div>     
+            
+            <div class="row row_search_params"><div class="col"><%= form.submit "search", class:"btn btn-outline-warning btn-block rounded" %></div></div>
+        <% end %>
+    </div>
+    
+    
+    <div id="artist_sf_block" class="sf_block sf_block_padd" style="visibility: hidden">
+        <%= form_with id:'artist_search_form', method: :get, url: artist_search_path(format: :json) do |form|  %>
+    
+            <div class="row row_search_params">
+                <div class="col-3 col_search_params">Name</div>
+                <div class="col-9"><%= form.text_field :request_name, placeholder:"enter name of artist", class:"form-control form-control-lg" %></div>
+            </div>
+                    
+            <div class="row row_search_params">
+                <div class="col-3 col_search_params">Type</div>
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col-6 col_date_from">Band<%= form.radio_button :artist_type, "1", checked:"checked", class:"form-control" %></div>
+                        <div class="col-6 col_date_to">Single<%= form.radio_button :artist_type, "0", class:"form-control" %></div>
+                    </div>
+                </div>
+            </div>
+                    
+                        
+            <div class="row row_search_params">
+                <div class="col-3 col_search_params">Debut date</div>
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col-6 col_date_from">
+                        Date from<%= form.date_field :date_from, value:"1900-01-01", min:"1900-01-01", max: Time.now.strftime('%Y-%m-%d'), class:"form-control form-control-lg" %>
+                        </div>
+                        <div class="col-6 col_date_to">
+                        Date to<%= form.date_field :date_to, value: Time.now.strftime('%Y-%m-%d'), min:"1900-01-01", max: Time.now.strftime('%Y-%m-%d'), class:"form-control form-control-lg" %>
+                        </div>
+                    </div>
+                </div>
+             </div>     
+            
+            <div class="row row_search_params"><div class="col"><%= form.submit "search", class:"btn btn-outline-warning btn-block rounded" %></div></div>
+        <% end %>
+    </div>
+    
+    <div id="music_storage_sf_block" class="sf_block sf_block_padd" style="visibility: hidden">
+        <%= form_with id:'music_storage_search_form', method: :get, url: music_storage_search_path(format: :json) do |form|  %>
+    
+            <div class="row row_search_params">
+                <div class="col-3 col_search_params">Name</div>
+                <div class="col-9"><%= form.text_field :request_name, placeholder:"enter name of music storage", class:"form-control form-control-lg" %></div>
+            </div>
+                    
+            <div class="row row_search_params">
+                <div class="col-3 col_search_params">Album</div>
+                <div class="col-9">
+                    <select class="form-control form-control-lg" name="music_storage_album_id" id="music_storage_album_id">
+                        <% Album.order(:name).all.each do |s|%>
+                            <option value=<%= s.id %>><%= s.name %></option>
+                        <%end%>
+                    </select>
+                </div>
+            </div>
+                    
+            <div class="row row_search_params">
+                <div class="col-3 col_search_params">Company</div>
+                <div class="col-9">
+                    <select class="form-control form-control-lg" name="music_storage_company_id" id="music_storage_company_id">
+                        <% Company.order(:name).all.each do |s|%>
+                            <option value=<%= s.id %>><%= s.name %></option>
+                        <%end%>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="row row_search_params">
+                <div class="col-3 col_search_params">Type</div>
+                <div class="col-9">
+                    <select class="form-control form-control-lg" name="music_storage_type_id" id="music_storage_type_id">
+                        <% StorageType.order(:name).all.each do |s|%>
+                            <option value=<%= s.id %>><%= s.name %></option>
+                        <%end%>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="row row_search_params"><div class="col"><%= form.submit "search", class:"btn btn-outline-warning btn-block rounded" %></div></div>
+        <% end %>
+    </div>
+    
+    
+    <div id="music_storage_sf_country_block" class="sf_block sf_block_padd" style="visibility: hidden">
+        <%= form_with id:'music_storage_search_form_country', method: :get, url: music_storage_search_country_path(format: :json) do |form|  %>
+            
+            <div class="row row_search_params">
+                <div class="col-5 col_search_params">Company country</div>
+                <div class="col-7">
+                    <select class="form-control form-control-lg" name="ms_company_country_id" id="ms_company_country_id">
+                        <% Country.order(:name).all.each do |s|%>
+                            <option value=<%= s.id %>><%= s.name %></option>
+                        <%end%>
+                    </select>
+                </div>
+            </div>
+                    
+            <div class="row row_search_params">
+                <div class="col-5 col_search_params">Album label country</div>
+                <div class="col-7">
+                    <select class="form-control form-control-lg" name="ms_label_country_id" id="ms_label_country_id">
+                        <% Country.order(:name).all.each do |s|%>
+                            <option value=<%= s.id %>><%= s.name %></option>
+                        <%end%>
+                    </select>
+                </div>
+            </div>
+                    
+            <div class="row row_search_params">
+                <div class="col-5 col_search_params">Production date</div>
+                <div class="col-7">
+                    <div class="row">
+                        <div class="col-6 col_date_from">
+                        Date from<%= form.date_field :date_from, value:"1900-01-01", min:"1900-01-01", max: Time.now.strftime('%Y-%m-%d'), class:"form-control form-control-lg" %>
+                        </div>
+                        <div class="col-6 col_date_to">
+                        Date to<%= form.date_field :date_to, value: Time.now.strftime('%Y-%m-%d'), min:"1900-01-01", max: Time.now.strftime('%Y-%m-%d'), class:"form-control form-control-lg" %>
+                        </div>
+                    </div>
+                </div>
+             </div>     
+            
+            <div class="row row_search_params"><div class="col"><%= form.submit "search", class:"btn btn-outline-warning btn-block rounded" %></div></div>
+        <% end %>
+    </div>
+    
+    
+    </div>
+</div>
+    <div id="search_result"></div>
+    
+

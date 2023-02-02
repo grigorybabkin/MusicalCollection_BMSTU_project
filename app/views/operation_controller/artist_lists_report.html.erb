@@ -1,0 +1,41 @@
+<h1>Storage Lists Report</h1>
+<table class="table table-bordered table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th>id</th>
+            <th>Artist name</th>
+            <th>Artist-band</th>
+            <th>Debut year</th>
+            <th>End year</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Birth date</th>
+            <th>Death date</th>
+            <th>Country</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @artist_lists.each do |s| %>
+        <tr>
+            <td><%= s.id%></td>
+            <td><%= s.artist_name%></td>
+            <td>
+             <% if s.type_band==1 -%>Band 
+            <% else %>Single
+            <% end -%>
+            </td>
+            <td><%= s.debut_year%></td>
+            <td><%= s.end_year%></td>
+            <td><%= s.first_name%></td>
+            <td><%= s.last_name%></td>
+            <td><%= s.birth_date%></td>
+            <td><%= s.death_date%></td>
+            <td><%= s.country_name%></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+            
+    
+ 
+ 

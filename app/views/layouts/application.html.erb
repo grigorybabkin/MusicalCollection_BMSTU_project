@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MusicalCollection</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+ 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    
+        
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+ <body data-spy="scroll" data-target="#navbar1" data-offset="60">
+         <% if user_signed_in? %>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-secondary" id="navbar1">
+        <div class="container text-center">
+            <a class="navbar-brand mr-1 mb-1 mt-0 text-dark" href="../">MUSICAL COLLECTION</a>
+            <div class="navbar-collapse collapse justify-content-end" id="collapsingNavbar">
+                <ul class="navbar-nav">
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle material-icons" href="#" id="navbardrop1" data-toggle="dropdown">search</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/">Search by parameters</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/composition_lists_report">Composition Lists Report</a>
+                            <a class="dropdown-item" href="/storage_lists_report">Storage Lists Report</a>
+                            <a class="dropdown-item" href="/artist_lists_report">Artist Lists Report</a>
+                        </div>
+                    </li>
+                        <% if current_user.admin? %>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle material-icons" href="#" id="navbardrop" data-toggle="dropdown">add</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/person/new">Person</a>
+                                <a class="dropdown-item" href="/artist/new">Artist</a>
+                                <a class="dropdown-item" href="/artist_list/new">Artist Info</a>
+                                <a class="dropdown-item" href="/label/new">Label</a>
+                                <a class="dropdown-item" href="/album/new">Album</a>
+                                <a class="dropdown-item" href="/composition/new">Composition</a>
+                                <a class="dropdown-item" href="/composition_list/new">Composition Info</a>
+                                <a class="dropdown-item" href="/music_storage/new">Music Storage</a>
+                                <a class="dropdown-item" href="/storage_list/new">Music Storage Info</a>
+                            </div>
+                        </li>
+                        <% end %>
+                        <% if current_user.admin? %>
+                        <li class='nav-item'><%= link_to "ADMIN MODE", edit_user_registration_path, class: 'btn btn-danger', title:"Edit ADMIN" %></li>
+                        <% else %>
+                        <li class='nav-item'><%= link_to "USER MODE", edit_user_registration_path, class: 'btn btn-light', title:"Edit USER" %></li>
+                        <% end%>
+                        <li class='nav-item'><%= link_to "clear", destroy_user_session_path, class: 'btn btn-warning material-icons', method: :delete, title:"Exit" %></li>
+        
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+    </nav> 
+    
+    <% if current_page?('/') %>
+    <header class="bg-secondary">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-12">
+                    <div class="text-center m-0 vh-100 d-flex flex-column justify-content-center text-dark">
+                        <h1 class="display-3 wow zoomIn" data-wow-delay="0s">MUSICAL COLLECTION</h1>
+                        <p class="wow flipInX" data-wow-delay="1s">COURSEWORK<br>BY<br>GRIGORY BABKIN &nbsp;&amp;&nbsp; ANNA ZAV'YALOVA</p>
+                        <p class="lead wow flipInX" data-wow-delay="2s">FIND YOUR MUSIC</p>
+                        <p class="wow rotateIn" data-wow-delay="2.3s"><%=button_tag "search", id:"search_btn", title:"click to start search your music", class:"btn btn-outline-light material-icons round_btn"%></p>
+                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <% end %>
+
+    
+    <div id="main_page" class="container h-100">
+        <%= yield %>
+    </div>
+    <script> new WOW().init(); </script>
+  </body>
+</html>

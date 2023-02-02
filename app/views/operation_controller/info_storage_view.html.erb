@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-11 name_field">
+            <div class="row type">MUSIC STORAGE</div>
+        <div class="row  name_field"><%=@music_storage.name%></div></div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-4">
+        <%= image_tag("views/storage.png", size:"300") %>
+    </div>
+    <div class="col-7">
+        <div class="row  description">
+            <div class="col-3 ">STORAGE TYPE:</div>
+            <div class="col-9"><%=@music_storage.storage_type.name%></div>
+        </div>
+        <div class="row  description">
+            <div class="col-3 ">ALBUMS:</div>
+            <div class="col-9">
+                <% @music_storage.albums.each do |s|%>
+                <%= link_to s.name, info_album_view_path(:album_id => s.id)%>&nbsp;&nbsp;&nbsp;
+                <% end %>
+            </div>
+        </div>
+        <div class="row  description">
+            <div class="col-3 ">RACK:</div>
+            <div class="col-9"><%=@music_storage.rack%></div>
+        </div>
+        <div class="row  description">
+            <div class="col-3 ">SHELF:</div>
+            <div class="col-9"><%=@music_storage.shelf%></div>
+        </div>
+        <div class="row  description">
+            <div class="col-3 ">SECTION:</div>
+            <div class="col-9"><%=@music_storage.section%></div>
+        </div>
+        <div class="row  description">
+            <div class="col-3 ">CELL</div>
+            <div class="col-9"><%=@music_storage.cell%></div>
+        </div>
+    </div>
+</div>
+

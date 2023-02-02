@@ -1,0 +1,30 @@
+<h1 class="cent" >Add</h1>
+
+<div class="center">
+
+<h3 class="grey">Artist</h3> 
+
+<%= form_for @artist, html: { multipart: true }  do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :type_band %>
+    <%= f.select :type_band, [['Single', 0],['Band', 1]], {}, { :class => 'form-control' } %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.file_field :avatar%>
+  </div>
+ 
+  <div class="form-group">
+    <%= f.label :bio %>
+    <%= f.text_area :bio, class: "form-control" %>
+  </div>
+  
+  <%= f.submit 'Create', class: "btn btn-outline-secondary btn-block" %>
+<% end %> 
+
+</div>

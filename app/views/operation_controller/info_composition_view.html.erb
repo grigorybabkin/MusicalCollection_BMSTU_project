@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-11 ">
+        <div class="row type">COMPOSITION</div>
+        <div class="row name_field"><%= @composition.name %></div></div>
+    </div>
+    
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <%= image_tag("views/composition.png", size:"300") %>
+        </div>
+        <div class="col-7">
+            <div class="row description">
+                <div class="col-3 ">ARTISTS:</div>
+                <div class="col-9">
+                    <% @composition.artists.each do |s| %> 
+                    <%= link_to s.name, info_artist_view_path(:artist_id => s.id)%>&nbsp;&nbsp;&nbsp;
+                    <% end%>
+                </div>
+            </div>
+            <div class="row description">
+                <div class="col-3 ">GENRE:</div>
+                <div class="col-9"><%= @composition.genre.name%></div>
+            </div>
+            <div class="row description">
+                <div class="col-3 ">DURATION:</div>
+                <div class="col-9"><%= @composition.duration.strftime("%H:%M:%S")%></div>
+            </div>
+            <div class="row description">
+                <div class="col-3 ">RELEASE DATE:</div>
+                <div class="col-9"><%= @composition.release_date%></div>
+            </div>
+
+            <div class="row description">
+                <div class="col-3 ">AUTHORS:</div>
+                <div class="col-9">
+                    <% @composition.persons.each do |s| %>
+                    <%= link_to s.first_name+" "+s.last_name, info_person_view_path(:person_id => s.id)%>&nbsp;&nbsp;&nbsp;
+                    <% end %>    
+                </div>
+            </div>
+            <div class="row description">
+                <div class="col-3 ">CONSISTED IN ALBUMS:</div>
+                <div class="col-9">
+                    <% @composition.albums.each do |s| %>
+                    <%= link_to s.name, info_album_view_path(:album_id => s.id) %>&nbsp;&nbsp;&nbsp;
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<div class="row justify-content-center space">
+    <div class="col-11">LYRICS:</div>
+</div>
+
+<div class="row justify-content-center text-center">
+    <div class="col-11"><%= simple_format(@composition.lyrics) %></div>
+</div>
+ 
